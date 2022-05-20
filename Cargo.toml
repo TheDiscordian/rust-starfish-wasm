@@ -3,6 +3,11 @@ name = "starfish-wasm"
 version = "1.0.0"
 edition = "2021"
 description = "*><> is a stack-based, reflective, two-dimensional esoteric programming language based directly off of ><>."
+repository = "https://github.com/TheDiscordian/rust-starfish/"
+documentation = "https://github.com/TheDiscordian/rust-starfish-wasm/blob/master/README.md"
+keywords = ["codegolf", "language", "wasm"]
+categories = ["compilers", "wasm"]
+license-file = "LICENSE"
 
 [lib]
 name = "starfish"
