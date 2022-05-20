@@ -38,6 +38,3 @@ features = [
 lto = true
 strip = true
 codegen-units = 1
-
-[build]
-target = "wasm32-unknown-unknown"
