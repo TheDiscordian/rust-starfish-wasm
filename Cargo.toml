@@ -1,0 +1,35 @@
+[package]
+name = "starfish-wasm"
+version = "1.0.0"
+edition = "2021"
+description = "*><> is a stack-based, reflective, two-dimensional esoteric programming language based directly off of ><>."
+
+[lib]
+name = "starfish"
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2.80"
+starfish = "1.2.1"
+getrandom = { version = "0.2.6", features = ["js"] }
+chrono = { version = "0.4.19", features = ["wasmbind"] }
+wasm-bindgen-futures = "0.4.30"
+js-sys = "0.3.57"
+
+[dependencies.web-sys]
+version = "0.3.57"
+features = [
+    "Window",
+    "Document",
+    "HtmlElement",
+    "HtmlInputElement",
+    "HtmlTextAreaElement",
+    "Element",
+    "Location",
+]
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
