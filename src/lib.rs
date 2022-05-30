@@ -9,6 +9,7 @@ use js_sys;
 
 static mut RUNNING: bool = false;
 static mut RUN_COUNT: usize = 0;
+static mut INPUT_READY: bool = false;
 
 #[wasm_bindgen]
 extern {
@@ -116,6 +117,10 @@ pub fn collect_input() {
 
     input_box.set_inner_text(&out_text);
     input_input.set_value("");
+
+    unsafe {
+        INPUT_READY = true;
+    }
 }
 
 #[wasm_bindgen]
@@ -155,10 +160,13 @@ pub async fn run_script() {
     let input_box = get_html_element_by_id(&document, "input");
 
     while !end {
-        let input_text = input_box.inner_text();
-        if input_text != "" {
-            code_box.inject_input(input_text.as_bytes().to_vec());
-            input_box.set_inner_text("");
+        unsafe {
+            if INPUT_READY {
+                let input_text = input_box.inner_text();
+                code_box.inject_input(input_text.as_bytes().to_vec());
+                input_box.set_inner_text("");
+                INPUT_READY = false;
+            }
         }
 
         (output, end, sleep_ms) = code_box.swim();
