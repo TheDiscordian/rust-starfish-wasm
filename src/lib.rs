@@ -162,10 +162,10 @@ pub async fn run_script() {
     while !end {
         unsafe {
             if INPUT_READY {
+                INPUT_READY = false;
                 let input_text = input_box.inner_text();
                 code_box.inject_input(input_text.as_bytes().to_vec());
                 input_box.set_inner_text("");
-                INPUT_READY = false;
             }
         }
 
